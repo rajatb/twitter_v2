@@ -15,15 +15,30 @@ class User: NSObject {
     var profileUrl: URL?
     var tagline: String?
     var dictionary: NSDictionary?
+    var id: Int64?
+    var followerCount: Int64?
+    var tweetsCount: Int64?
+    var followingCount: Int64?
+    var profileBackgroundImageUrl: URL?
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
+        id = dictionary["id"] as? Int64
         name = dictionary["name"] as? String
         screenname += (dictionary["screen_name"] as? String) ?? ""
         if let profileUrlString = dictionary["profile_image_url_https"] as? String {
             profileUrl = URL(string: profileUrlString)
         }
+        
+        followerCount = (dictionary["followers_count"] as? Int64) ?? 0
+        tweetsCount = (dictionary["statuses_count"] as? Int64) ?? 0
+        followingCount = (dictionary["favourites_count"] as? Int64) ?? 0
+        
+        if let profileBackgroundImageString = dictionary["profile_background_image_url_https"] as? String {
+            profileBackgroundImageUrl = URL(string: profileBackgroundImageString)
+        }
 
+        
         tagline = dictionary["description"] as? String
     }
     

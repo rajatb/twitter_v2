@@ -7,15 +7,22 @@
 //
 
 import UIKit
+//import FLEX
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, TweetCellDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     var tweets: [Tweet]!
     
     let refreshControl = UIRefreshControl()
+    
+    var tweetTapped: Tweet?
+    
+    var showMentions: Bool = false
 
     override func viewDidLoad() {
+        
+//        FLEXManager.shared().showExplorer()
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
@@ -23,7 +30,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        getHomeTimeLine()
+        showMentions ? getMentionTimeLine() : getHomeTimeLine()
+    
         
         // Pull to refresh
         
@@ -46,11 +54,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
+    @IBAction func onTapOfImage(_ sender: UITapGestureRecognizer) {
+       
+
+        
+    }
     
-    // MARK: - Network 
+    
+    // MARK: - Network
     func getHomeTimeLine(){
         TwitterClient.sharedInstance.homeTimeLine(success: { (tweets: [Tweet]) in
             self.tweets = tweets
@@ -63,10 +78,30 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     }
     
+    func getMentionTimeLine(){
+        TwitterClient.sharedInstance.mentionsTimeLine(success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
+            
+        }) { (error: Error) in
+            print("Error: \(error.localizedDescription)")
+        }
+        
+    }
+    
     // MARK: - Compose View controller
     func composeViewController(composeViewController:ComposeViewController, updatedTweet tweet: Tweet){
         tweets.insert(tweet, at: 0)
         self.tableView.reloadData()
+    }
+    
+    // MARK: - TweetCell delegate
+    func tweetCell(tweetCell:TweetCell, tweetTapped:Tweet) {
+        // Called from the cell
+        //perfom the segue
+        self.tweetTapped = tweetTapped
+        performSegue(withIdentifier: "profileSegue", sender: self)
     }
 
     @IBAction func onLogout(_ sender: Any) {
@@ -89,6 +124,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             let detailViewController = segue.destination as! DetailViewController
             detailViewController.tweet = tweet
             
+        } else if (segue.identifier == "profileSegue") {
+            print("Image clicked segue")
+            let profileVC = segue.destination as! ProfileViewController
+            
+            
+            profileVC.user = tweetTapped?.user
+            
+            
         } else {
             let navigationViewController = segue.destination as! UINavigationController
             let composeViewController = navigationViewController.topViewController as! ComposeViewController
@@ -97,6 +140,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

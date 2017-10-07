@@ -9,6 +9,11 @@
 import UIKit
 import AFNetworking
 
+@objc protocol TweetCellDelegate {
+    @objc optional func tweetCell(tweetCell:TweetCell, tweetTapped:Tweet)
+    
+}
+
 class TweetCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -23,6 +28,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetInfoImage: UIImageView!
     @IBOutlet var retweetInfoTopConstraint: NSLayoutConstraint!
     @IBOutlet var profileImageRetweetContraint: NSLayoutConstraint!
+    
+    var delegate: TweetCellDelegate?
     
     var tweet: Tweet! {
         didSet {
@@ -59,6 +66,31 @@ class TweetCell: UITableViewCell {
         // Initialization code
         profileImage.layer.cornerRadius = 5
         profileImage.clipsToBounds = true
+        
+        // Add the gesture 
+        // The didTap: method will be defined in Step 3 below.
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(sender:)))
+        
+        // Optionally set the number of required taps, e.g., 2 for a double click
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        
+        // Attach it to a view of your choice. If it's a UIImageView, remember to enable user interaction
+        profileImage.isUserInteractionEnabled = true
+        profileImage.addGestureRecognizer(tapGestureRecognizer)
+
+    }
+    
+    func didTap(sender: UITapGestureRecognizer) {
+        //let location = sender.location(in: view)
+        // User tapped at the point above. Do something with that if you want.
+        print("I am tapped")
+        
+        delegate?.tweetCell?(tweetCell: self, tweetTapped: tweet)
+        
+        //call prepare to segue
+        //imageIndexTappged = sender.view?.tag
+        
+        //performSegue(withIdentifier: "profileSegue", sender: self)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

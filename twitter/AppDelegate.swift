@@ -21,8 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil {
             print("There is a current user")
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyBoard.instantiateViewController(withIdentifier: "TweetsNavigationController")
-            window?.rootViewController = vc
+            let hamburgerVC = storyBoard.instantiateViewController(withIdentifier: "hamburgerVC") as! HamburgerViewController
+            let menuVC = storyBoard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+            
+            menuVC.hamburgerVC = hamburgerVC
+            hamburgerVC.menuVC = menuVC
+            
+            
+            //let vc = storyBoard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+            window?.rootViewController = hamburgerVC
         }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (notification: Notification) in

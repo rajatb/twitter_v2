@@ -10,6 +10,6 @@ target 'twitter' do
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
   pod 'DateToolsSwift'
-  
+  pod 'FLEX'
 
 end
