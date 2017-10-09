@@ -6,15 +6,15 @@ Time spent: **10** hours spent in total. (On Call week at work :()
 
 The following **required** functionality is completed:
 
-- [ X] Hamburger menu
-   - [ X] Dragging anywhere in the view should reveal the menu.
-   - [ X] The menu should include links to your profile, the home timeline, and the mentions view.
-   - [ X] The menu can look similar to the example or feel free to take liberty with the UI.
-- [ ] Profile page
-   - [ X] Contains the user header view
-   - [ X] Contains a section with the users basic stats: # tweets, # following, # followers
-- [ ] Home Timeline
-   - [X ] Tapping on a user image should bring up that user's profile page
+- [X] Hamburger menu
+   - [X] Dragging anywhere in the view should reveal the menu.
+   - [X] The menu should include links to your profile, the home timeline, and the mentions view.
+   - [X] The menu can look similar to the example or feel free to take liberty with the UI.
+- [X] Profile page
+   - [X] Contains the user header view
+   - [X] Contains a section with the users basic stats: # tweets, # following, # followers
+- [X] Home Timeline
+   - [X] Tapping on a user image should bring up that user's profile page
 
 The following **optional** features are implemented:
 
@@ -43,7 +43,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/rajatb/twitter_v2/blob/master/twitter.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
