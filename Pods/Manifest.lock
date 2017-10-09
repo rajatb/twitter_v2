@@ -18,19 +18,22 @@ PODS:
     - AFNetworking/NSURLSession (~> 3.0.0)
   - DateToolsSwift (2.0.3)
   - FLEX (2.4.0)
+  - UIColor_Hex_Swift (3.0.2)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
   - DateToolsSwift
   - FLEX
+  - UIColor_Hex_Swift
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
+  UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: 33bfc8fee1afb4b0a8ced98a37dc63a310d0bd22
+PODFILE CHECKSUM: 0d3b2900cc308aa57a7a1840f02ee5e40d1b4df9
 
 COCOAPODS: 1.3.1

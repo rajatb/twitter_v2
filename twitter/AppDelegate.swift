@@ -8,6 +8,7 @@
 
 import UIKit
 import BDBOAuth1Manager
+import UIColor_Hex_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        customAppearance()
         
         if User.currentUser != nil {
             print("There is a current user")
@@ -76,6 +79,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         return true
     }
+    
+    func customAppearance(){
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.barTintColor = UIColor("#326ada")
+        navigationBarAppearace.tintColor = UIColor("#ffffff")
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName : UIColor("#ffffff")]
+        
+    }
+
 
 
 }

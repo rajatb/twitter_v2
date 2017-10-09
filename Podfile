@@ -11,5 +11,6 @@ target 'twitter' do
   pod 'BDBOAuth1Manager'
   pod 'DateToolsSwift'
   pod 'FLEX'
+  pod 'UIColor_Hex_Swift'
 
 end
